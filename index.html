@@ -1,0 +1,467 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>MergedMovies – Watch All Movies in One Place</title>
+    <meta name="description" content="MergedMovies provides links to all your favorite movie websites in one premium dashboard.">
+    <meta name="keywords" content="movies, anime, hdhub4u, gokuhd, vegamovies, rogmovies, katmoviehd, katdrama, bollywood, cinema, merged movies">
+    <meta name="robots" content="index, follow">
+    <meta name="author" content="MergedMovies">
+    
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=Poppins:wght@400;500;600;700;800&display=swap');
+
+        :root {
+            --bg-main: #0f172a;
+            --bg-alt: #1a2a4a;
+            --card-bg: #1e293b;
+            --card-hover: #2d3e52;
+            --primary: #3b82f6;
+            --primary-hover: #2563eb;
+            --primary-light: #60a5fa;
+            --premium: #f59e0b;
+            --success: #10b981;
+            --danger: #ef4444;
+            --text-main: #f8fafc;
+            --text-sub: #94a3b8;
+            --border-color: rgba(255,255,255,0.08);
+        }
+
+        * { margin: 0; padding: 0; box-sizing: border-box; font-family: 'Poppins', sans-serif; user-select: none; -webkit-user-select: none; }
+        
+        html { scroll-behavior: smooth; }
+        html, body { height: 100%; background-color: var(--bg-main); color: var(--text-main); }
+        body { overflow-x: hidden; width: 100%; box-sizing: border-box; }
+
+        /* SPLASH SCREEN */
+        #splash-screen {
+            position: fixed; top: 0; left: 0; width: 100%; height: 100vh;
+            background: linear-gradient(135deg, var(--bg-main) 0%, var(--bg-alt) 100%);
+            z-index: 999999; display: flex; flex-direction: column; justify-content: center; align-items: center;
+            transition: opacity 0.5s ease;
+        }
+
+        .splash-logo {
+            font-size: 80px; margin-bottom: 10px; font-weight: 900;
+            background: linear-gradient(135deg, var(--primary-light), var(--premium), var(--primary));
+            -webkit-background-clip: text; -webkit-text-fill-color: transparent;
+            animation: popIn 1s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+        }
+
+        .splash-text { font-size: 28px; font-weight: 700; color: #fff; letter-spacing: 3px; animation: slideUp 1s ease 0.3s both; }
+        .splash-text span { color: var(--primary-light); }
+        
+        .loader-bar {
+            width: 0px; height: 5px; background: linear-gradient(90deg, var(--primary), var(--premium));
+            margin-top: 25px; border-radius: 3px; box-shadow: 0 0 20px var(--primary);
+            animation: loadLine 2.5s ease-in-out forwards;
+        }
+
+        @keyframes popIn { 0% { transform: scale(0.3); opacity: 0; } 100% { transform: scale(1); opacity: 1; } }
+        @keyframes slideUp { 0% { transform: translateY(30px); opacity: 0; } 100% { transform: translateY(0); opacity: 1; } }
+        @keyframes loadLine { 0% { width: 0; opacity: 0.5; } 50% { opacity: 1; } 100% { width: 180px; opacity: 0; } }
+        @keyframes fadeIn { 0% { opacity: 0; transform: translateY(10px); } 100% { opacity: 1; transform: translateY(0); } }
+        @keyframes float { 0%, 100% { transform: translateY(0px); } 50% { transform: translateY(-8px); } }
+
+        /* POPUP STYLES */
+        .popup-overlay {
+            position: fixed; top: 0; left: 0; width: 100%; height: 100vh;
+            background: rgba(0, 0, 0, 0.8); z-index: 10000;
+            display: none; justify-content: center; align-items: center;
+            backdrop-filter: blur(8px);
+        }
+        .popup-box {
+            background: var(--card-bg); padding: 35px 30px; border-radius: 20px;
+            max-width: 420px; width: 90%; text-align: center;
+            border: 1px solid var(--border-color); box-shadow: 0 20px 60px rgba(0,0,0,0.6);
+            animation: popIn 0.3s ease-out;
+        }
+        .popup-box h3 { color: var(--premium); margin-bottom: 15px; font-size: 24px; font-weight: 700; }
+        .popup-box p { color: var(--text-main); font-size: 14px; margin-bottom: 28px; line-height: 1.7; }
+        .popup-actions { display: flex; gap: 12px; justify-content: center; flex-direction: column; }
+        
+        .popup-btn {
+            padding: 12px 18px; border-radius: 10px; border: none; cursor: pointer;
+            font-weight: 600; font-size: 15px; transition: 0.3s; text-decoration: none;
+        }
+        .popup-direct { background: var(--primary); color: #fff; box-shadow: 0 6px 20px rgba(59, 130, 246, 0.4); }
+        .popup-direct:hover { background: var(--primary-hover); transform: translateY(-2px); box-shadow: 0 8px 25px rgba(59, 130, 246, 0.5); }
+        .popup-close { background: rgba(255,255,255,0.1); color: var(--text-sub); border: 1px solid var(--border-color); }
+        .popup-close:hover { background: rgba(255,255,255,0.15); color: #fff; }
+
+        /* MAIN LAYOUT FIX */
+        .main-wrapper {
+            display: flex;
+            min-height: 100vh;
+            width: 100%;
+            background-color: var(--bg-main);
+        }
+
+        .side-ad-left {
+            width: 250px;
+            background: linear-gradient(180deg, var(--bg-alt) 0%, var(--bg-main) 100%);
+            border: 1px solid var(--border-color);
+            display: flex;
+            align-items: flex-start;
+            justify-content: center;
+            padding-top: 20px;
+            overflow-y: auto;
+            border-right: 1px solid var(--border-color);
+        }
+
+        @media (max-width: 1200px) {
+            .side-ad-left { display: none; }
+        }
+
+        /* ADS SECTIONS */
+        .header-ad-section { display: flex; justify-content: center; align-items: center; padding: 15px 0; background: rgba(59, 130, 246, 0.05); border-bottom: 1px solid var(--border-color); margin-bottom: 20px; }
+        .email-section-ad { display: flex; justify-content: center; align-items: center; padding: 15px 0; background: rgba(245, 158, 11, 0.05); border: 1px solid var(--border-color); border-radius: 12px; margin: 30px 0; }
+        .in-grid-ad { grid-column: 1 / -1; display: flex; justify-content: center; align-items: center; padding: 15px 0; background: rgba(59, 130, 246, 0.05); border: 1px solid var(--border-color); border-radius: 16px; margin: 10px 0; box-shadow: 0 4px 12px rgba(0,0,0,0.2); }
+
+        .content-center {
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+            overflow-y: auto;
+            padding-bottom: 80px;
+            width: 100%;
+        }
+
+        .ad-wrapper {
+            width: 320px;
+            height: 50px;
+            margin: 0 auto;
+            overflow: hidden; 
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            background: rgba(255,255,255,0.02);
+            border: 1px solid var(--border-color);
+            border-radius: 12px;
+            padding: 5px;
+        }
+
+        .side-ad-wrapper {
+            width: 250px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            flex-direction: column;
+        }
+
+        /* STICKY BOTTOM AD */
+        .sticky-bottom-ad {
+            position: fixed; 
+            bottom: 0; 
+            left: 0; 
+            width: 100%; 
+            height: 70px;
+            background: linear-gradient(180deg, var(--card-bg) 0%, var(--bg-main) 100%);
+            display: flex; 
+            justify-content: center; 
+            align-items: center; 
+            z-index: 99999; 
+            border-top: 1px solid var(--border-color);
+            box-shadow: 0 -10px 30px rgba(0,0,0,0.8);
+        }
+
+        /* HOME SCREEN */
+        #home-screen { 
+            padding: 0;
+            display: none;
+        }
+
+        .home-content {
+            padding: 30px;
+            max-width: 1100px;
+            margin: 0 auto;
+            width: 100%;
+        }
+
+        /* VIEWER FIX */
+        #viewer-screen { 
+            display: none; 
+            height: 100vh; 
+            width: 100%;
+            flex-direction: column; 
+            background: var(--bg-main); 
+            position: fixed;
+            top: 0;
+            left: 0;
+            z-index: 2000;
+        }
+
+        /* HEADER FIX */
+        header { 
+            text-align: center; 
+            padding: 40px 10px; 
+            background: linear-gradient(180deg, rgba(59, 130, 246, 0.1) 0%, transparent 100%);
+            border-bottom: 1px solid var(--border-color);
+            margin-bottom: 30px;
+        }
+
+        header h1 { 
+            font-size: 42px; 
+            font-weight: 800; 
+            color: #fff; 
+            letter-spacing: 1px;
+            margin-bottom: 12px;
+            white-space: nowrap;
+            overflow: hidden;
+            text-overflow: ellipsis;
+        }
+
+        header h1 span { 
+            background: linear-gradient(135deg, var(--primary-light), var(--premium));
+            -webkit-background-clip: text; 
+            -webkit-text-fill-color: transparent;
+        }
+
+        header p { 
+            color: var(--text-sub); 
+            font-size: 16px; 
+            margin-bottom: 10px;
+        }
+
+        /* CARDS */
+        .section-title { 
+            font-size: 20px; 
+            font-weight: 700; 
+            margin: 35px 0 20px; 
+            border-left: 4px solid var(--primary); 
+            padding-left: 15px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .grid-container { 
+            display: grid; 
+            grid-template-columns: repeat(auto-fill, minmax(270px, 1fr)); 
+            gap: 22px;
+            margin-bottom: 30px;
+        }
+
+        .card {
+            background: linear-gradient(135deg, var(--card-bg) 0%, var(--card-hover) 100%);
+            border-radius: 16px; 
+            padding: 28px 22px; 
+            text-align: center;
+            cursor: pointer; 
+            transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+            border: 1px solid var(--border-color);
+            box-shadow: 0 8px 16px rgba(0,0,0,0.2);
+            position: relative; 
+            overflow: hidden;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+        }
+
+        .card:hover { 
+            transform: translateY(-8px) scale(1.02);
+            border-color: var(--primary);
+            box-shadow: 0 16px 32px rgba(59, 130, 246, 0.3);
+        }
+
+        .card-icon { 
+            font-size: 45px; 
+            margin-bottom: 15px;
+            animation: float 3s ease-in-out infinite;
+        }
+
+        .card-title { 
+            font-size: 18px; 
+            font-weight: 700; 
+            margin-bottom: 10px;
+            color: var(--text-main);
+        }
+
+        /* VIEWER UI */
+        .viewer-header { 
+            background: var(--card-bg); 
+            padding: 12px 20px; 
+            display: flex; 
+            align-items: center; 
+            justify-content: space-between; 
+            color: #fff; 
+            z-index: 10;
+            border-bottom: 1px solid var(--border-color);
+        }
+
+        .back-btn { 
+            background: rgba(59, 130, 246, 0.2);
+            color: var(--primary-light);
+            border: 1px solid var(--border-color);
+            padding: 8px 15px; 
+            border-radius: 8px; 
+            cursor: pointer; 
+            font-weight: 600;
+        }
+
+        iframe { 
+            width: 100%; 
+            height: 100%; 
+            border: none; 
+            flex-grow: 1; 
+            background: #fff;
+        }
+
+        footer {
+            background: var(--card-bg);
+            border-top: 1px solid var(--border-color);
+            padding: 30px 25px;
+            text-align: center;
+            color: var(--text-sub);
+            font-size: 13px;
+            margin-top: 50px;
+        }
+
+        @media (max-width: 768px) {
+            header h1 { font-size: 32px; }
+            .grid-container { grid-template-columns: repeat(auto-fill, minmax(200px, 1fr)); gap: 15px; }
+        }
+    </style>
+  <script src="https://cdn.tailwindcss.com/3.4.17" type="text/javascript"></script>
+</head>
+<body oncontextmenu="return false;">
+    <div id="splash-screen">
+        <div class="splash-logo">M</div>
+        <div class="splash-text">MERGED <span>MOVIES</span></div>
+        <div class="loader-bar"></div>
+    </div>
+    
+    <div class="sticky-bottom-ad">
+        <div class="ad-wrapper">
+            <script>atOptions = {'key' : '9c25d2d740c9bcadbfd19a3cf16a0352','format' : 'iframe','height' : 50,'width' : 320,'params' : {}};</script>
+            <script src="https://www.highperformanceformat.com/9c25d2d740c9bcadbfd19a3cf16a0352/invoke.js"></script>
+        </div>
+    </div>
+
+    <div id="info-popup" class="popup-overlay">
+        <div class="popup-box">
+            <h3>⚠️ Important Notice</h3>
+            <p>If the video fails to load inside the app, please click the <b>Direct Link</b> button below.</p>
+            <div class="popup-actions">
+                <a href="#" id="popup-direct-link" target="_blank" class="popup-btn popup-direct" onclick="closePopup()">🔗 Open Direct Link</a> 
+                <button class="popup-btn popup-close" onclick="closePopup()">Continue in App</button>
+            </div>
+        </div>
+    </div>
+
+    <div class="main-wrapper" id="home-screen">
+        <div class="side-ad-left">
+            <div class="side-ad-wrapper">
+                <script>atOptions = {'key' : '9c25d2d740c9bcadbfd19a3cf16a0352','format' : 'iframe','height' : 600,'width' : 250,'params' : {}};</script>
+                <script src="https://www.highperformanceformat.com/9c25d2d740c9bcadbfd19a3cf16a0352/invoke.js"></script>
+            </div>
+        </div>
+
+        <div class="content-center">
+            <header>
+                <h1>Merged <span>Movies</span></h1>
+                <p>Your All-in-One Premium Movie Dashboard</p>
+            </header>
+
+            <div class="header-ad-section">
+                <div class="ad-wrapper">
+                    <script>atOptions = {'key' : '9c25d2d740c9bcadbfd19a3cf16a0352','format' : 'iframe','height' : 50,'width' : 320,'params' : {}};</script>
+                    <script src="https://www.highperformanceformat.com/9c25d2d740c9bcadbfd19a3cf16a0352/invoke.js"></script>
+                </div>
+            </div>
+
+            <div class="home-content">
+                <h2 class="section-title">🎬 Premium Movie Sources</h2>
+                
+                <div class="grid-container">
+                    <div class="card" onclick="openWeb('https://vegamovies.cologne/', 'Vegamovies')">
+                        <div class="card-icon">🚀</div><div class="card-title">Vegamovies</div>
+                        <div style="font-size:11px;color:var(--premium);font-weight:700;">HQ DOWNLOADS</div>
+                    </div>
+                    <div class="card" onclick="openWeb('https://rogmovies.pics/', 'ROG Movies')">
+                        <div class="card-icon">🎬</div><div class="card-title">ROG Movies</div>
+                        <div style="font-size:11px;color:var(--primary-light);font-weight:700;">BOLLYWOOD</div>
+                    </div>
+                    <div class="card" onclick="openWeb('https://www.gokuhd.com/', 'GokuHD')">
+                        <div class="card-icon">🌀</div><div class="card-title">GokuHD</div>
+                        <div style="font-size:11px;color:var(--success);font-weight:700;">ANIME</div>
+                    </div>
+                    <div class="card" onclick="openWeb('https://new4.hdhub4u.fo/?utm=mn', 'HDHub4u')">
+                        <div class="card-icon">🌐</div><div class="card-title">HDHub4u</div>
+                        <div style="font-size:11px;color:var(--primary-light);font-weight:700;">ALL MOVIES</div>
+                    </div>
+                    <div class="card" onclick="openWeb('https://hdmovieverse.co.in/', 'HDMovieverse')">
+                        <div class="card-icon">🎥</div><div class="card-title">HDMovieverse</div>
+                        <div style="font-size:11px;color:var(--premium);font-weight:700;">RELEASES</div>
+                    </div>
+                    <div class="card" onclick="openWeb('https://new.katmoviehd.cymru/', 'KatMovieHD')">
+                        <div class="card-icon">🐱</div><div class="card-title">KatMovieHD</div>
+                        <div style="font-size:11px;color:var(--success);font-weight:700;">MULTI SOURCE</div>
+                    </div>
+                    <div class="card" onclick="openWeb('https://www.katdrama.net/', 'KatDrama')">
+                        <div class="card-icon">🎭</div><div class="card-title">KatDrama</div>
+                        <div style="font-size:11px;color:var(--premium);font-weight:700;">K-DRAMA</div>
+                    </div>
+                    <div class="card" onclick="openWeb('https://www.pikahd.eu/', 'PikaHD')">
+                        <div class="card-icon">⚡</div><div class="card-title">PikaHD</div>
+                        <div style="font-size:11px;color:var(--primary-light);font-weight:700;">CINEMA</div>
+                    </div>
+
+                    <div class="in-grid-ad">
+                        <div class="ad-wrapper">
+                            <script>atOptions = {'key' : '9c25d2d740c9bcadbfd19a3cf16a0352','format' : 'iframe','height' : 50,'width' : 320,'params' : {}};</script>
+                            <script src="https://www.highperformanceformat.com/9c25d2d740c9bcadbfd19a3cf16a0352/invoke.js"></script>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <footer>
+                <div class="footer-copyright">© 2026 MergedMovies - Premium Entertainment</div>
+            </footer>
+        </div>
+    </div>
+
+    <div id="viewer-screen">
+        <div class="viewer-header">
+            <button class="back-btn" onclick="goHome()">⬅ Back</button>
+            <div class="viewer-title" id="viewer-title">MergedMovies</div>
+            <a href="#" id="direct-open-btn" target="_blank" style="background:var(--primary);color:white;padding:8px 15px;border-radius:8px;text-decoration:none;font-size:12px;font-weight:700;">DIRECT</a>
+        </div>
+        <div style="background:var(--bg-main);width:100%;display:flex;justify-content:center;padding:5px 0;border-bottom:1px solid rgba(255,255,255,0.1);">
+            <div class="ad-wrapper">
+                <script>atOptions = {'key' : '9c25d2d740c9bcadbfd19a3cf16a0352','format' : 'iframe','height' : 50,'width' : 320,'params' : {}};</script>
+                <script src="https://www.highperformanceformat.com/9c25d2d740c9bcadbfd19a3cf16a0352/invoke.js"></script>
+            </div>
+        </div>
+        <iframe id="web-frame" src=""></iframe>
+        <div style="background:var(--bg-main);width:100%;display:flex;justify-content:center;padding:5px 0;border-top:1px solid rgba(255,255,255,0.1);">
+            <div class="ad-wrapper">
+                <script>atOptions = {'key' : '9c25d2d740c9bcadbfd19a3cf16a0352','format' : 'iframe','height' : 50,'width' : 320,'params' : {}};</script>
+                <script src="https://www.highperformanceformat.com/9c25d2d740c9bcadbfd19a3cf16a0352/invoke.js"></script>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        document.onkeydown = function(e) { if(e.keyCode == 123 || (e.ctrlKey && e.shiftKey && e.keyCode == 73)) return false; }
+        window.onload = () => { setTimeout(() => { document.getElementById('splash-screen').style.opacity = '0'; setTimeout(() => { document.getElementById('splash-screen').style.display = 'none'; document.getElementById('home-screen').style.display = 'flex'; }, 500); }, 2000); };
+        function openWeb(url, name) {
+            document.getElementById('viewer-screen').style.display = 'flex';
+            document.getElementById('home-screen').style.display = 'none';
+            document.getElementById('web-frame').src = url;
+            document.getElementById('viewer-title').textContent = name;
+            document.getElementById('direct-open-btn').href = url;
+            document.getElementById('info-popup').style.display = 'flex';
+            document.getElementById('popup-direct-link').href = url;
+            history.pushState(null, '', '#viewer');
+        }
+        function goHome() { document.getElementById('viewer-screen').style.display = 'none'; document.getElementById('home-screen').style.display = 'flex'; document.getElementById('web-frame').src = ""; if(window.location.hash === '#viewer') history.back(); }
+        function closePopup() { document.getElementById('info-popup').style.display = 'none'; }
+        window.addEventListener('popstate', () => { if (window.location.hash !== '#viewer') { document.getElementById('viewer-screen').style.display = 'none'; document.getElementById('home-screen').style.display = 'flex'; document.getElementById('web-frame').src = ""; } });
+    </script>
+    <script type='text/javascript' src='https://pl28898452.effectivegatecpm.com/a0/7e/d2/a07ed2c8c7869a25f82bbe9ee3ce8f6e.js'></script>
+    <script src="https://pl28896078.effectivegatecpm.com/2a/e3/02/2ae302633767e62e475c35118b1a4620.js"></script>
+</body>
+</html>
