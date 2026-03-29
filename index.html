@@ -5,8 +5,8 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>MergedMovies Pro – Advanced Movie Hub</title>
-  <meta name="description" content="MergedMovies Pro - Advanced movie streaming platform with bookmarks, history tracking, and smart recommendations.">
-  <meta name="keywords" content="movies, anime, streaming, bookmarks, history, merged movies pro">
+  <meta name="description" content="MergedMovies Pro - Advanced movie streaming platform. Explore south indian movies dubbed in hindi full movie, bollywood hindi movie, and hollywood movie download website guides.">
+  <meta name="keywords" content="hollywood movie download, hollywood movie download app, hollywood movies download, hollywood movie download website, how to download hollywood movie, all hollywood movie download website, hollywood movie hindi dubbed download, new hollywood movie download kaise kare, how to download hollywood movie in hindi, hollywood movies hindi dubbed download, koi bhi hollywood movie download kaise karen, hindi dubbed download all hollywood movies, hollywood movies hindi dubbed download link, south indian movies dubbed in hindi full movie, south indian movies in hindi dubbed, south indian movies dubbed in hindi full, new south indian movie dubbed in hindi full 2023, top 10 south indian movies in hindi dubbed, suspense south indian movies dubbed in hindi, new south indian movies dubbed in hindi 2025 full, new south indian movies dubbed in hindi 2024 full, new south indian movies dubbed in hindi 2023 full, south indian movies dubbed in hindi full movie 2023 new, best bollywood movies in hindi, bollywood hindi movie, new bollywood movie download kaise kare, hindi movies download, new hollywood movie download kaise kare, best website to download movies in hd, bollywood download, धुरंधर full movie in hindi, movie download, 100 crore movie in hindi, bollywood movie app, dhurandhar full movie in hindi, how to download movie, bollywood movies, dhurandhar 2 full movie in hindi, download movies, movie download app, video download, video download guide, video downloader, video download delete, tiktok video download, youtube video download">
   <meta name="robots" content="index, follow">
   <meta name="author" content="MergedMovies">
   <link rel="sitemap" type="application/xml" title="Sitemap" href="/sitemap.xml">
@@ -34,24 +34,6 @@
         html { scroll-behavior: smooth; }
         html, body { height: 100%; background-color: var(--bg-main); color: var(--text-main); }
         body { overflow-x: hidden; width: 100%; box-sizing: border-box; }
-
-        /* FLOATING ADS CSS */
-        .floating-ad-left, .floating-ad-right {
-            position: fixed; top: 50%; transform: translateY(-50%);
-            width: 160px; height: 300px; background: rgba(15, 19, 31, 0.9);
-            border: 1px solid var(--border-color); z-index: 9999;
-            display: flex; flex-direction: column; align-items: center; justify-content: center;
-            border-radius: 8px; box-shadow: 0 0 20px rgba(0,0,0,0.5);
-        }
-        .floating-ad-left { left: 10px; }
-        .floating-ad-right { right: 10px; }
-        .close-float {
-            position: absolute; top: -10px; right: -10px; background: var(--danger);
-            color: white; border-radius: 50%; width: 25px; height: 25px;
-            display: flex; align-items: center; justify-content: center;
-            cursor: pointer; font-size: 12px; font-weight: bold; border: 2px solid var(--text-main);
-        }
-        @media (max-width: 1300px) { .floating-ad-left, .floating-ad-right { display: none; } }
 
         /* SPLASH SCREEN */
         #splash-screen {
@@ -198,6 +180,24 @@
             align-items: center;
             flex-direction: column;
         }
+
+        /* FLOATING ADS CSS */
+        .floating-ad-left, .floating-ad-right {
+            position: fixed; top: 50%; transform: translateY(-50%);
+            width: 160px; height: 300px; background: rgba(15, 19, 31, 0.9);
+            border: 1px solid var(--border-color); z-index: 9999;
+            display: flex; flex-direction: column; align-items: center; justify-content: center;
+            border-radius: 8px; box-shadow: 0 0 20px rgba(0,0,0,0.5);
+        }
+        .floating-ad-left { left: 10px; }
+        .floating-ad-right { right: 10px; }
+        .close-float {
+            position: absolute; top: -10px; right: -10px; background: var(--danger);
+            color: white; border-radius: 50%; width: 25px; height: 25px;
+            display: flex; align-items: center; justify-content: center;
+            cursor: pointer; font-size: 12px; font-weight: bold; border: 2px solid var(--text-main);
+        }
+        @media (max-width: 1300px) { .floating-ad-left, .floating-ad-right { display: none; } }
 
         .sticky-bottom-ad {
             position: fixed; 
@@ -828,8 +828,7 @@
         }
 
         .item-actions {
-            display: flex;
-            gap: 8px;
+            display: flex; gap: 8px;
         }
 
         .action-btn {
@@ -880,20 +879,10 @@
             filter: drop-shadow(0 0 8px rgba(236, 72, 153, 0.6));
             animation: heartBeat 0.4s ease;
         }
-
-        .sitemap-link {
-            display: inline-block;
-            margin-top: 15px;
-            color: var(--primary-light);
-            text-decoration: none;
-            font-weight: 600;
-            transition: 0.3s;
-        }
-
-        .sitemap-link:hover {
-            color: var(--premium);
-            text-decoration: underline;
-        }
+        
+        /* SITE MAP LINK STYLES */
+        .sitemap-link { display: inline-block; margin: 15px 15px; color: var(--primary-light); text-decoration: none; font-weight: 600; transition: 0.3s; cursor: pointer; }
+        .sitemap-link:hover { color: var(--premium); text-decoration: underline; }
 
         @media (max-width: 768px) {
             header h1 { font-size: 36px; }
@@ -947,7 +936,7 @@
   <div id="info-popup" class="popup-overlay">
    <div class="popup-box">
     <h3>⚠️ Important Notice</h3>
-    <p>If the 𝙒𝙚𝙗𝙨𝙞𝙩𝙚 fails to load inside the app, please click the <b>Direct Link</b> button below.</p>
+    <p>If the Website fails to load inside the app, please click the <b>Direct Link</b> button below.</p>
     <div class="popup-actions">
      <a href="#" id="popup-direct-link" target="_blank" class="popup-btn popup-direct" onclick="closePopup()">🔗 Open Direct Link</a> <button class="popup-btn popup-close" onclick="closePopup()">Continue in App</button>
     </div>
@@ -1065,13 +1054,18 @@
        <script src="https://www.highperformanceformat.com/fc44ffd0fc14b144149751dc5340a83d/invoke.js"></script>
       </div>
      </div>
-     <div class="seo-section">
-      <h2>About MergedMovies Pro – Advanced Movie Hub</h2>
-      <p>Welcome to <strong>MergedMovies Pro</strong>, the ultimate <strong>advanced movie streaming platform</strong> where you can explore <strong>Hollywood movies in Hindi dubbed, Bollywood movies, South Indian movies dubbed in Hindi, anime, K-dramas, and the latest blockbuster movies</strong>. Our platform combines premium entertainment with intelligent <strong>history tracking, bookmarks, and smart recommendations</strong>.</p>
-      <p>Our revolutionary <strong>History API system</strong> automatically tracks your viewing preferences, allowing you to seamlessly resume watching and discover personalized recommendations based on your <strong>movie history and bookmarked content</strong>. With <strong>advanced bookmarking features</strong>, you can save your favorite movie sources for instant access.</p>
-      <p>MergedMovies Pro features <strong>8+ premium movie sources</strong> including Vegamovies, ROG Movies, GokuHD, HDHub4u, HDMovieverse, KatMovieHD, KatDrama, and PikaHD. Each source is carefully curated to provide <strong>new Hollywood movies, new Bollywood movies, and new South Indian movies dubbed in Hindi in full HD and 4K quality</strong>.</p>
-      <p>Whether you're searching for <strong>Hollywood action movies in Hindi dubbed, new Bollywood movies 2024, anime with English subtitles, or K-drama series</strong>, MergedMovies Pro delivers a comprehensive entertainment experience with powerful search and filtering capabilities.</p>
+     
+     <div id="about-us-section" class="seo-section">
+      <h2>About Us – Hollywood Bollywood Hindi Dubbed Movies Platform</h2>
+      <p>Welcome to our movie platform where you can explore <strong>Hollywood movies in Hindi dubbed</strong>, Bollywood movies, <strong>South Indian movies dubbed in Hindi</strong>, action movies, adventure movies, and the latest blockbuster movies. Our website is designed for movie lovers who enjoy watching new Hollywood movies, new Bollywood movies, and new <strong>South Indian Hindi dubbed movies</strong> in HD quality. We are the <strong>best website to download movies in hd</strong>.</p>
+      <p>On our platform you can discover information about <strong>new Hollywood movie in Hindi dubbed</strong>, latest Hollywood action movie, English movie in Hindi dubbed, adventure movies in Hindi, and blockbuster Hollywood movies in Hindi language. Many users search for <strong>Hollywood movies in Hindi dubbed full action HD</strong>, new Hollywood movies 2024, Hollywood action movies in Hindi dubbed full HD, and our website helps them find the latest movie updates and guides in one place. Explore our <strong>all hollywood movie download website</strong> hub.</p>
+      <p>If you love watching new Hindi movie, <strong>new Hollywood movie Hindi dubbed</strong>, English movies in Hindi, Hollywood action movie in Hindi, and full action HD movies, our website helps you discover trending films. We regularly update lists of new Hollywood movies, new Bollywood movies, and new <strong>South Indian movies dubbed in Hindi full movie HD</strong> so users can easily explore the latest releases including <strong>south indian movies dubbed in hindi full movie 2023 new</strong>.</p>
+      <p>Our platform covers many movie categories including action movies, adventure movies, fantasy movies, thriller movies, and blockbuster Hollywood movies in Hindi dubbed. Whether you are looking for <strong>new Hollywood movie Hindi dubbed 2024</strong>, latest Bollywood movie 2024, or <strong>South Indian movies dubbed in Hindi full movie HD</strong>, you can find updated information here. We offer the best <strong>hollywood movie download app</strong> experience.</p>
+      <p>Many users search for <strong>hollywood movie download</strong>, <strong>hollywood movie download app</strong>, English Hollywood movie in Hindi, <strong>new Hollywood Hindi dubbed movies</strong>, <strong>all hollywood movie download website</strong>, and new movie trailers 2023 & 2024. Our goal is to provide a place where movie fans can explore new movies, movie trailers, movie reviews, and the latest updates about Hollywood, Bollywood, and South Indian cinema. Learn <strong>how to download hollywood movie</strong> and <strong>koi bhi hollywood movie download kaise karen</strong> with our <strong>video download guide</strong>.</p>
+      <p>If you are a fan of Hollywood movies, English movies in Hindi dubbed, new action movies, <strong>new Bollywood movies</strong>, and <strong>South Indian movies dubbed in Hindi full movie</strong>, our platform helps you stay updated with the latest movies 2023, movies 2024, new movie trailers, blockbuster movies, and upcoming films like <strong>dhurandhar full movie in hindi</strong> and <strong>dhurandhar 2 full movie in hindi</strong>.</p>
+      <p>Discover the world of <strong>hollywood movies download</strong>, Bollywood movies, <strong>South Hindi dubbed movies</strong>, action movies, and <strong>new movies 2024</strong> all in one place and stay updated with the latest movie entertainment with our <strong>movie download app</strong>.</p>
      </div>
+
      <div class="ad-section-horizontal">
       <div class="ad-wrapper">
        <script src="https://pl28928708.profitablecpmratenetwork.com/7f/3a/16/7f3a163fafea60acf12c3e22ab916251.js"></script>
@@ -1079,83 +1073,43 @@
        <script src="https://www.highperformanceformat.com/fc44ffd0fc14b144149751dc5340a83d/invoke.js"></script>
       </div>
      </div>
-     <div class="seo-section">
-      <h2>Features – Smart History &amp; Advanced Bookmarking</h2>
-      <div class="faq-box">
-       <h4>📜 Advanced History Tracking</h4>
-       <p>Our <strong>intelligent history API</strong> tracks every movie source you visit with <strong>accurate timestamp logging, smart time-display (Just now, 2h ago, 3d ago)</strong>, and <strong>one-click history management</strong>. Your complete viewing history is saved and organized chronologically.</p>
-      </div>
-      <div class="faq-box">
-       <h4>⭐ Smart Bookmarking System</h4>
-       <p>Save your favorite movie sources instantly with our <strong>one-click bookmark system</strong>. Bookmarked sources appear in a dedicated tab with glowing star indicators, allowing you to <strong>quickly access premium content without searching</strong>.</p>
-      </div>
-      <div class="faq-box">
-       <h4>🔄 Data Persistence &amp; Sync</h4>
-       <p>All your <strong>bookmarks and history are automatically saved to your personal Canva Sheet</strong>, ensuring your preferences persist between sessions. Access your data anytime through the Data button above the code.</p>
-      </div>
-      <div class="faq-box">
-       <h4>🎯 Smart Filtering &amp; Categories</h4>
-       <p>Browse movies by category: <strong>All Sources, Bollywood, Hollywood, Anime, and K-Drama</strong>. Our advanced filtering system helps you find exactly what you're looking for instantly.</p>
-      </div>
-      <div class="faq-box">
-       <h4>🎬 Real-time Statistics</h4>
-       <p>View live stats showing <strong>10+ Premium Sources, 10K+ Movies Available, 4K Max Quality, and 24/7 Always Online</strong> status. Stay updated with the latest platform metrics.</p>
-      </div>
-      <div class="faq-box">
-       <h4>🎵 Audio Feedback System</h4>
-       <p>Enjoy smooth <strong>Web Audio API sound effects</strong> for every interaction - bookmark toggles, navigation, and more. Our carefully crafted audio design enhances your browsing experience.</p>
-      </div>
-     </div>
-     <div class="ad-section">
-      <div class="ad-wrapper">
-       <script src="https://pl28928708.profitablecpmratenetwork.com/7f/3a/16/7f3a163fafea60acf12c3e22ab916251.js"></script>
-       <script>atOptions = {'key' : 'fc44ffd0fc14b144149751dc5340a83d','format' : 'iframe','height' : 90,'width' : 728,'params' : {}};</script>
-       <script src="https://www.highperformanceformat.com/fc44ffd0fc14b144149751dc5340a83d/invoke.js"></script>
-      </div>
-     </div>
-     <div class="seo-section">
-      <h2>FAQ – MergedMovies Pro Movie Streaming &amp; Bookmarking</h2>
+     
+     <div id="faq-seo-section" class="seo-section">
+      <h2>FAQ – Hollywood Bollywood Hindi Dubbed Movies</h2>
       <div class="faq-box">
        <h4>1. What are Hollywood movies in Hindi dubbed?</h4>
-       <p>Hollywood movies in Hindi dubbed are <strong>English movies that are translated and voiced in Hindi language</strong> so Hindi-speaking audiences can easily watch Hollywood action movies, adventure movies, and blockbuster films.</p>
+       <p>Hollywood movies in Hindi dubbed are English movies that are translated and voiced in Hindi language so Hindi-speaking audiences can easily watch Hollywood action movies, adventure movies, and blockbuster films. Find your <strong>hollywood movies hindi dubbed download link</strong> here.</p>
       </div>
       <div class="faq-box">
-       <h4>2. How does MergedMovies Pro track my history?</h4>
-       <p>Our <strong>advanced History API system</strong> automatically tracks every movie source you visit with <strong>precise timestamps and intelligent time-display (Just now, 2h ago, 3d ago)</strong>. Your complete history is saved and synced to your Canva Sheet for easy access anytime.</p>
+       <h4>2. Where can I watch Hollywood movies in Hindi dubbed?</h4>
+       <p>Many streaming platforms provide <strong>Hollywood movies in Hindi dubbed full HD</strong>, including services like Netflix, Amazon Prime Video, and Disney+ Hotstar. You can also explore <strong>hindi dubbed download all hollywood movies</strong> on our site.</p>
       </div>
       <div class="faq-box">
-       <h4>3. How do I bookmark my favorite sources?</h4>
-       <p>Simply click the <strong>star icon (☆) on any movie source card</strong> to instantly bookmark it. Bookmarked sources appear with a <strong>glowing active star (⭐)</strong> and are organized in the dedicated <strong>Bookmarks tab</strong> for quick access.</p>
+       <h4>3. Are new Hollywood movies available in Hindi dubbed?</h4>
+       <p>Yes, many <strong>new Hollywood movies 2023 and 2024</strong> are released with Hindi dubbing, especially action movies, superhero movies, and adventure films. Use our <strong>video download guide</strong> to see <strong>new hollywood movie download kaise kare</strong>.</p>
       </div>
       <div class="faq-box">
-       <h4>4. Are new Hollywood movies available in Hindi dubbed?</h4>
-       <p>Yes, many <strong>new Hollywood movies 2023 and 2024</strong> are released with <strong>Hindi dubbing</strong>, especially action movies, superhero movies, and adventure films available on our premium sources.</p>
+       <h4>4. What types of movies are popular in Hindi dubbed?</h4>
+       <p>Popular categories include Hollywood action movies, adventure movies in Hindi, fantasy movies, thriller movies, and <strong>South Indian movies dubbed in Hindi full movie HD</strong>. We also track <strong>100 crore movie in hindi</strong> list.</p>
       </div>
       <div class="faq-box">
-       <h4>5. What types of movies are popular on MergedMovies Pro?</h4>
-       <p>Popular categories include <strong>Hollywood action movies, adventure movies in Hindi, fantasy movies, thriller movies, Bollywood films, anime, K-drama series, and South Indian movies dubbed in Hindi full movie HD</strong>.</p>
+       <h4>5. Are South Indian movies also available in Hindi dubbed?</h4>
+       <p>Yes, many <strong>South Indian movies dubbed in Hindi full movie 2023 and 2024</strong> are very popular among viewers and often become blockbuster hits like <strong>धुरंधर full movie in hindi</strong>.</p>
       </div>
       <div class="faq-box">
-       <h4>6. Can I delete my history on MergedMovies Pro?</h4>
-       <p>Yes! You can <strong>delete individual history items with one click</strong> or use the <strong>Clear All History button</strong> in the History tab to remove your entire viewing history at once.</p>
+       <h4>6. Why are Hindi dubbed movies popular?</h4>
+       <p>Hindi dubbed movies allow audiences to enjoy <strong>all hollywood movie download website</strong> content in local language. It makes <strong>bollywood hindi movie</strong> and <strong>hindi movies download</strong> much more accessible.</p>
       </div>
       <div class="faq-box">
-       <h4>7. Is my bookmark and history data saved permanently?</h4>
-       <p>Absolutely! All your <strong>bookmarks and history are automatically saved to your personal Canva Sheet</strong>, persisting between sessions. Your data remains private and accessible only to you.</p>
+       <h4>7. Can I watch new Bollywood movies online?</h4>
+       <p>Yes, many platforms release <strong>new Bollywood movies 2024</strong>, new Hindi movies, and blockbuster Bollywood films online. Learn <strong>new bollywood movie download kaise kare</strong> on our platform.</p>
       </div>
       <div class="faq-box">
-       <h4>8. Which premium movie sources are included?</h4>
-       <p>MergedMovies Pro features <strong>9+ premium sources including Vegamovies, ROG Movies, GokuHD, HDHub4u, HDMovieverse, KatMovieHD, KatDrama, PikaHD, and KatMovie4K</strong>, all carefully curated for quality and content variety.</p>
-      </div>
-      <div class="faq-box">
-       <h4>9. Can I filter movies by category?</h4>
-       <p>Yes! Use our <strong>advanced category filters (All Sources, Bollywood, Hollywood, Anime, K-Drama)</strong> to find exactly what you're looking for. Your selections update instantly across all sources.</p>
-      </div>
-      <div class="faq-box">
-       <h4>10. How can I access my bookmarks and history?</h4>
-       <p>Click the <strong>⭐ Bookmarks tab</strong> for your saved sources or the <strong>📜 History tab</strong> to view your complete watching history with timestamps. Both sync automatically to your Canva Sheet.</p>
+       <h4>8. How can I find the latest movies?</h4>
+       <p>You can visit movie websites like ours to explore new movies 2023, movies 2024, new movie trailers, <strong>hollywood movies download</strong>, <strong>bollywood download</strong>, and <strong>South Hindi dubbed movies</strong>. We provide tools like <strong>youtube video download</strong> and <strong>tiktok video download</strong> guides.</p>
       </div>
      </div>
+
      <div class="ad-section-horizontal">
       <div class="ad-wrapper">
        <script src="https://pl28928708.profitablecpmratenetwork.com/7f/3a/16/7f3a163fafea60acf12c3e22ab916251.js"></script>
@@ -1168,7 +1122,11 @@
      <div class="footer-copyright">
       © 2026 MergedMovies Pro - Advanced Entertainment Hub with Smart History &amp; Bookmarks
      </div>
-     <a href="/sitemap.xml" target="_blank" class="sitemap-link">📂 View Sitemap (XML)</a>
+     <div class="footer-links" style="margin-top:15px; display:flex; justify-content:center; gap:20px; flex-wrap:wrap;">
+         <a onclick="document.getElementById('about-us-section').scrollIntoView({behavior:'smooth'})" class="sitemap-link">ℹ️ About Us</a>
+         <a onclick="document.getElementById('faq-seo-section').scrollIntoView({behavior:'smooth'})" class="sitemap-link">❓ FAQ</a>
+         <a href="/sitemap.xml" target="_blank" class="sitemap-link">📂 View Sitemap (XML)</a>
+     </div>
     </footer>
    </div>
   </div>
@@ -1334,7 +1292,7 @@
         
         bookmarksEmpty.style.display = 'none';
         bookmarksList.innerHTML = bookmarkedItems.map(item => `
-            <div class="bookmark-item" onclick="openWeb('${item.url}', '${item.name}', '${movieSources.find(s => s.url === item.url)?.id || ''}')">
+            <div class="bookmark-item" onclick="openWeb('${item.url}', '${item.name}', '${movieSources.find(s=>s.url===item.url)?.id || ''}')">
                 <div class="item-info">
                     <div class="item-name">⭐ ${item.name}</div>
                 </div>
@@ -1366,7 +1324,7 @@
             const timeAgo = getTimeAgo(date);
             
             return `
-                <div class="history-item" onclick="openWeb('${item.url}', '${item.name}', '${movieSources.find(s => s.url === item.url)?.id || ''}')">
+                <div class="history-item" onclick="openWeb('${item.url}', '${item.name}', '${movieSources.find(s=>s.url===item.url)?.id || ''}')">
                     <div class="item-info">
                         <div class="item-name">📺 ${item.name}</div>
                         <div class="item-time">${timeAgo}</div>
@@ -1405,6 +1363,9 @@
         document.getElementById(tabName + '-tab').classList.add('active');
         if (event) event.target.classList.add('active');
         
+        // Auto Update URL based on Tab (Deep Linking for Tabs)
+        history.pushState(null, '', '#' + tabName);
+
         // Initialize FAQ accordion on first load
         if (tabName === 'faq' && !document.getElementById('faq-accordion').innerHTML) {
             initializeFAQ();
@@ -1593,20 +1554,29 @@
         initializeSDK();
         document.body.addEventListener('click', triggerPopUnder);
 
-        // --- DEEP LINKING CHECK ---
+        // --- DEEP LINKING CHECK ON LOAD ---
         const hash = window.location.hash;
         if (hash.startsWith('#view/')) {
             const sourceId = hash.split('/')[1];
             const source = movieSources.find(s => s.id === sourceId);
             if (source) {
-                // If deep link exists, skip splash animation or handle after
                 document.getElementById('splash-screen').style.display = 'none';
                 openWeb(source.url, source.title, source.id);
                 return;
             }
+        } else if (hash.startsWith('#')) {
+            const tabName = hash.substring(1);
+            const tabBtn = document.querySelector(`.quick-tab[onclick*="${tabName}"]`);
+            if (tabBtn) {
+                document.getElementById('splash-screen').style.display = 'none';
+                switchTab(tabName);
+                document.getElementById('home-screen').style.display = 'flex';
+                updateAllUI();
+                return;
+            }
         }
         
-        // Normal splash
+        // Faster splash
         setTimeout(() => { 
             soundEffects.playSuccess();
             document.getElementById('splash-screen').style.opacity = '0'; 
@@ -1644,7 +1614,7 @@
         document.getElementById('viewer-screen').style.display = 'none'; 
         document.getElementById('home-screen').style.display = 'flex'; 
         document.getElementById('web-frame').src = ""; 
-        // Reset hash
+        // Reset hash to Home
         history.pushState(null, '', window.location.pathname + window.location.search);
     }
 
@@ -1669,4 +1639,4 @@
   <script src="https://pl28928708.profitablecpmratenetwork.com/7f/3a/16/7f3a163fafea60acf12c3e22ab916251.js"></script>
   <script src="https://pl28928708.profitablecpmratenetwork.com/7f/3a/16/7f3a163fafea60acf12c3e22ab916251.js"></script>
  <script>(function(){function c(){var b=a.contentDocument||a.contentWindow.document;if(b){var d=b.createElement('script');d.innerHTML="window.__CF$cv$params={r:'9dd5021691b5cbb5',t:'MTc3MzY3NzIxOC4wMDAwMDA='};var a=document.createElement('script');a.nonce='';a.src='/cdn-cgi/challenge-platform/scripts/jsd/main.js';document.getElementsByTagName('head')[0].appendChild(a);";b.getElementsByTagName('head')[0].appendChild(d)}}if(document.body){var a=document.createElement('iframe');a.height=1;a.width=1;a.style.position='absolute';a.style.top=0;a.style.left=0;a.style.border='none';a.style.visibility='hidden';document.body.appendChild(a);if('loading'!==document.readyState)c();else if(window.addEventListener)document.addEventListener('DOMContentLoaded',c);else{var e=document.onreadystatechange||function(){};document.onreadystatechange=function(b){e(b);'loading'!==document.readyState&&(document.onreadystatechange=e,c())}}}})();</script></body>
-   </html>
+ </html>
