@@ -9,6 +9,7 @@
   <meta name="keywords" content="movies, anime, streaming, bookmarks, history, merged movies pro">
   <meta name="robots" content="index, follow">
   <meta name="author" content="MergedMovies">
+  <link rel="sitemap" type="application/xml" title="Sitemap" href="/sitemap.xml">
   <style>
         @import url('https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=Outfit:wght@300;400;500;600;700;800&display=swap');
 
@@ -880,6 +881,20 @@
             animation: heartBeat 0.4s ease;
         }
 
+        .sitemap-link {
+            display: inline-block;
+            margin-top: 15px;
+            color: var(--primary-light);
+            text-decoration: none;
+            font-weight: 600;
+            transition: 0.3s;
+        }
+
+        .sitemap-link:hover {
+            color: var(--premium);
+            text-decoration: underline;
+        }
+
         @media (max-width: 768px) {
             header h1 { font-size: 36px; }
             .splash-logo { font-size: 70px; }
@@ -932,7 +947,7 @@
   <div id="info-popup" class="popup-overlay">
    <div class="popup-box">
     <h3>⚠️ Important Notice</h3>
-    <p>If the video fails to load inside the app, please click the <b>Direct Link</b> button below.</p>
+    <p>If the 𝙒𝙚𝙗𝙨𝙞𝙩𝙚 fails to load inside the app, please click the <b>Direct Link</b> button below.</p>
     <div class="popup-actions">
      <a href="#" id="popup-direct-link" target="_blank" class="popup-btn popup-direct" onclick="closePopup()">🔗 Open Direct Link</a> <button class="popup-btn popup-close" onclick="closePopup()">Continue in App</button>
     </div>
@@ -1153,6 +1168,7 @@
      <div class="footer-copyright">
       © 2026 MergedMovies Pro - Advanced Entertainment Hub with Smart History &amp; Bookmarks
      </div>
+     <a href="/sitemap.xml" target="_blank" class="sitemap-link">📂 View Sitemap (XML)</a>
     </footer>
    </div>
   </div>
@@ -1300,7 +1316,7 @@
                 </div>
             `;
             
-            card.addEventListener('click', () => openWeb(source.url, source.title));
+            card.addEventListener('click', () => openWeb(source.url, source.title, source.id));
             sourcesTab.appendChild(card);
         });
     }
@@ -1318,7 +1334,7 @@
         
         bookmarksEmpty.style.display = 'none';
         bookmarksList.innerHTML = bookmarkedItems.map(item => `
-            <div class="bookmark-item" onclick="openWeb('${item.url}', '${item.name}')">
+            <div class="bookmark-item" onclick="openWeb('${item.url}', '${item.name}', '${movieSources.find(s => s.url === item.url)?.id || ''}')">
                 <div class="item-info">
                     <div class="item-name">⭐ ${item.name}</div>
                 </div>
@@ -1350,7 +1366,7 @@
             const timeAgo = getTimeAgo(date);
             
             return `
-                <div class="history-item" onclick="openWeb('${item.url}', '${item.name}')">
+                <div class="history-item" onclick="openWeb('${item.url}', '${item.name}', '${movieSources.find(s => s.url === item.url)?.id || ''}')">
                     <div class="item-info">
                         <div class="item-name">📺 ${item.name}</div>
                         <div class="item-time">${timeAgo}</div>
@@ -1572,10 +1588,25 @@
 
     window.onload = async () => { 
         soundEffects.init();
+        
+        // Start SDK in background
         initializeSDK();
         document.body.addEventListener('click', triggerPopUnder);
 
-        // Faster splash - 1.2 seconds instead of 2
+        // --- DEEP LINKING CHECK ---
+        const hash = window.location.hash;
+        if (hash.startsWith('#view/')) {
+            const sourceId = hash.split('/')[1];
+            const source = movieSources.find(s => s.id === sourceId);
+            if (source) {
+                // If deep link exists, skip splash animation or handle after
+                document.getElementById('splash-screen').style.display = 'none';
+                openWeb(source.url, source.title, source.id);
+                return;
+            }
+        }
+        
+        // Normal splash
         setTimeout(() => { 
             soundEffects.playSuccess();
             document.getElementById('splash-screen').style.opacity = '0'; 
@@ -1587,7 +1618,7 @@
         }, 1200); 
     };
 
-    function openWeb(url, name) {
+    function openWeb(url, name, id) {
         soundEffects.playClick();
         addToHistory(url, name);
         document.getElementById('viewer-screen').style.display = 'flex';
@@ -1597,9 +1628,14 @@
         document.getElementById('direct-open-btn').href = url;
         document.getElementById('info-popup').style.display = 'flex';
         document.getElementById('popup-direct-link').href = url;
-        history.pushState(null, '', '#viewer');
         
-        // Trigger another popup on movie open
+        // --- UPDATE LINK (DEEP LINKING) ---
+        if (id) {
+            history.pushState(null, '', '#view/' + id);
+        } else {
+            history.pushState(null, '', '#viewer');
+        }
+        
         window.open("https://pl28928708.profitablecpmratenetwork.com/7f/3a/16/7f3a163fafea60acf12c3e22ab916251.js", "_blank");
     }
 
@@ -1608,7 +1644,8 @@
         document.getElementById('viewer-screen').style.display = 'none'; 
         document.getElementById('home-screen').style.display = 'flex'; 
         document.getElementById('web-frame').src = ""; 
-        if(window.location.hash === '#viewer') history.back(); 
+        // Reset hash
+        history.pushState(null, '', window.location.pathname + window.location.search);
     }
 
     function closePopup() { 
@@ -1617,7 +1654,7 @@
     }
 
     window.addEventListener('popstate', () => { 
-        if (window.location.hash !== '#viewer') { 
+        if (!window.location.hash.startsWith('#view/')) { 
             soundEffects.playClick();
             document.getElementById('viewer-screen').style.display = 'none'; 
             document.getElementById('home-screen').style.display = 'flex'; 
@@ -1632,4 +1669,4 @@
   <script src="https://pl28928708.profitablecpmratenetwork.com/7f/3a/16/7f3a163fafea60acf12c3e22ab916251.js"></script>
   <script src="https://pl28928708.profitablecpmratenetwork.com/7f/3a/16/7f3a163fafea60acf12c3e22ab916251.js"></script>
  <script>(function(){function c(){var b=a.contentDocument||a.contentWindow.document;if(b){var d=b.createElement('script');d.innerHTML="window.__CF$cv$params={r:'9dd5021691b5cbb5',t:'MTc3MzY3NzIxOC4wMDAwMDA='};var a=document.createElement('script');a.nonce='';a.src='/cdn-cgi/challenge-platform/scripts/jsd/main.js';document.getElementsByTagName('head')[0].appendChild(a);";b.getElementsByTagName('head')[0].appendChild(d)}}if(document.body){var a=document.createElement('iframe');a.height=1;a.width=1;a.style.position='absolute';a.style.top=0;a.style.left=0;a.style.border='none';a.style.visibility='hidden';document.body.appendChild(a);if('loading'!==document.readyState)c();else if(window.addEventListener)document.addEventListener('DOMContentLoaded',c);else{var e=document.onreadystatechange||function(){};document.onreadystatechange=function(b){e(b);'loading'!==document.readyState&&(document.onreadystatechange=e,c())}}}})();</script></body>
- </html>
+   </html>
