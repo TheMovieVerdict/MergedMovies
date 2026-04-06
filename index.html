@@ -53,8 +53,17 @@
      ]
    }
    </script>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+   <link rel="preload" as="style" href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=Outfit:wght@300;400;500;600;700;800&display=swap">
+   <link rel="preconnect" href="https://cdn.tailwindcss.com">
+  <link rel="preconnect" href="https://cdn.jsdelivr.net">
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=Outfit:wght@300;400;500;600;700;800&display=swap" media="print" onload="this.media='all'">
+  <noscript>
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=Outfit:wght@300;400;500;600;700;800&display=swap">
+  </noscript>
   <style>
-        @import url('https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=Outfit:wght@300;400;500;600;700;800&display=swap');
+         @import url('https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=Outfit:wght@300;400;500;600;700;800&display=swap');
 
         :root {
             --bg-main: #08090f;
@@ -84,7 +93,12 @@
             position: fixed; top: 0; left: 0; width: 100%; height: 100vh;
             background: linear-gradient(135deg, var(--bg-main) 0%, var(--bg-alt) 100%);
             z-index: 999999; display: flex; flex-direction: column; justify-content: center; align-items: center;
-            transition: opacity 0.5s ease;
+            transition: opacity 0.4s ease-out;
+        }
+
+        .grid-container, .info-hub-container, footer, .sidebar, .hero-container {
+            content-visibility: auto;
+            contain-intrinsic-size: 1px 500px;
         }
 
         .splash-logo {
@@ -101,7 +115,7 @@
         .loader-bar {
             width: 0px; height: 6px; background: linear-gradient(90deg, var(--primary), var(--premium), var(--success));
             margin-top: 30px; border-radius: 3px; box-shadow: 0 0 30px rgba(124, 58, 237, 0.5);
-            animation: loadLine 2.5s ease-in-out forwards;
+            animation: loadLine 1s ease-out forwards;
         }
 
         @keyframes popIn { 0% { transform: scale(0.3); opacity: 0; } 100% { transform: scale(1); opacity: 1; } }
@@ -1257,38 +1271,6 @@
         .sidebar-label { opacity: 0; transition: 0.3s; font-weight: 600; }
         .sidebar:hover .sidebar-label { opacity: 1; }
 
-        /* HERO CAROUSEL */
-        .hero-container {
-            width: 100%; height: 400px; border-radius: 24px; overflow: hidden;
-            margin-bottom: 40px; position: relative;
-            background: linear-gradient(135deg, var(--card-bg) 0%, #000 100%);
-            border: 1px solid var(--border-color);
-        }
-        .hero-slide {
-            position: absolute; inset: 0; opacity: 0; transition: 1s ease;
-            display: flex; align-items: center; padding: 60px;
-        }
-        .hero-slide.active { opacity: 1; }
-        .hero-content { max-width: 500px; z-index: 2; position: relative; }
-        .hero-tag {
-            display: inline-block; padding: 5px 12px; border-radius: 20px;
-            background: var(--premium); color: white; font-size: 12px;
-            font-weight: 700; text-transform: uppercase; margin-bottom: 15px;
-        }
-        .hero-title { font-size: 42px; font-weight: 800; margin-bottom: 15px; line-height: 1.1; }
-        .hero-desc { color: var(--text-sub); margin-bottom: 25px; line-height: 1.6; }
-        .hero-btn {
-            padding: 12px 30px; border-radius: 12px; border: none;
-            background: white; color: black; font-weight: 700; cursor: pointer;
-            transition: 0.3s; display: flex; align-items: center; gap: 10px;
-        }
-        .hero-btn:hover { transform: scale(1.05); box-shadow: 0 10px 30px rgba(255,255,255,0.2); }
-        .hero-overlay {
-            position: absolute; inset: 0;
-            background: linear-gradient(90deg, rgba(8,9,15,1) 0%, rgba(8,9,15,0.8) 40%, rgba(8,9,15,0) 100%);
-            z-index: 1;
-        }
-
         /* TOAST NOTIFICATIONS */
         #toast-container {
             position: fixed; bottom: 100px; right: 30px; z-index: 10000;
@@ -1351,16 +1333,6 @@
                 padding-left: 18px;
                 padding-right: 18px;
             }
-            .hero-container {
-                height: auto;
-                min-height: 360px;
-            }
-            .hero-slide {
-                padding: 32px 22px;
-                align-items: flex-end;
-            }
-            .hero-title { font-size: 30px; }
-            .hero-desc { font-size: 14px; }
             .browser-input-group {
                 flex-direction: column;
             }
@@ -1381,10 +1353,10 @@
             }
         }
     </style>
-  <script src="https://cdn.tailwindcss.com/3.4.17" type="text/javascript"></script>
-  <script src="https://cdn.jsdelivr.net/npm/lucide@0.263.0/dist/umd/lucide.min.js" type="text/javascript"></script>
-  <script src="/_sdk/data_sdk.js" type="text/javascript"></script>
-  <script src="/_sdk/element_sdk.js" type="text/javascript"></script>
+  <script defer src="https://cdn.tailwindcss.com/3.4.17" type="text/javascript"></script>
+  <script defer src="https://cdn.jsdelivr.net/npm/lucide@0.263.0/dist/umd/lucide.min.js" type="text/javascript"></script>
+  <script defer src="/_sdk/data_sdk.js" type="text/javascript"></script>
+  <script defer src="/_sdk/element_sdk.js" type="text/javascript"></script>
  </head>
  <body oncontextmenu="return false;">
    <!-- --- NEW PRO V5 UI ELEMENTS (DO NOT REMOVE) --- -->
@@ -1419,17 +1391,17 @@
   <div class="floating-ad-left" id="float-l">
       <div class="close-float" onclick="this.parentElement.remove()">X</div>
       <div class="ad-wrapper">
-          <script src="https://pl28928708.profitablecpmratenetwork.com/7f/3a/16/7f3a163fafea60acf12c3e22ab916251.js"></script>
+          <script src="https://pl28928708.profitablecpmratenetwork.com/7f/3a/16/7f3a163fafea60acf12c3e22ab916251.js" defer></script>
           <script>atOptions={'key':'fc44ffd0fc14b144149751dc5340a83d','format':'iframe','height':50,'width':320,'params':{}};</script>
-          <script src="https://www.highperformanceformat.com/fc44ffd0fc14b144149751dc5340a83d/invoke.js"></script>
+          <script src="https://www.highperformanceformat.com/fc44ffd0fc14b144149751dc5340a83d/invoke.js" defer></script>
       </div>
   </div>
   <div class="floating-ad-right" id="float-r">
       <div class="close-float" onclick="this.parentElement.remove()">X</div>
       <div class="ad-wrapper">
-          <script src="https://pl28928708.profitablecpmratenetwork.com/7f/3a/16/7f3a163fafea60acf12c3e22ab916251.js"></script>
+          <script src="https://pl28928708.profitablecpmratenetwork.com/7f/3a/16/7f3a163fafea60acf12c3e22ab916251.js" defer></script>
           <script>atOptions={'key':'fc44ffd0fc14b144149751dc5340a83d','format':'iframe','height':50,'width':320,'params':{}};</script>
-          <script src="https://www.highperformanceformat.com/fc44ffd0fc14b144149751dc5340a83d/invoke.js"></script>
+          <script src="https://www.highperformanceformat.com/fc44ffd0fc14b144149751dc5340a83d/invoke.js" defer></script>
       </div>
   </div>
 
@@ -1475,9 +1447,9 @@
   </div>
   <div class="sticky-bottom-ad">
    <div class="ad-wrapper">
-    <script src="https://pl28928708.profitablecpmratenetwork.com/7f/3a/16/7f3a163fafea60acf12c3e22ab916251.js"></script>
+    <script src="https://pl28928708.profitablecpmratenetwork.com/7f/3a/16/7f3a163fafea60acf12c3e22ab916251.js" defer></script>
     <script>atOptions = {'key' : 'fc44ffd0fc14b144149751dc5340a83d','format' : 'iframe','height' : 50,'width' : 320,'params' : {}};</script>
-    <script src="https://www.highperformanceformat.com/fc44ffd0fc14b144149751dc5340a83d/invoke.js"></script>
+    <script src="https://www.highperformanceformat.com/fc44ffd0fc14b144149751dc5340a83d/invoke.js" defer></script>
    </div>
   </div>
   <div id="info-popup" class="popup-overlay">
@@ -1492,9 +1464,9 @@
   <div class="main-wrapper" id="home-screen">
    <div class="side-ad-left">
     <div class="side-ad-wrapper">
-     <script src="https://pl28928708.profitablecpmratenetwork.com/7f/3a/16/7f3a163fafea60acf12c3e22ab916251.js"></script>
+     <script src="https://pl28928708.profitablecpmratenetwork.com/7f/3a/16/7f3a163fafea60acf12c3e22ab916251.js" defer></script>
      <script>atOptions = {'key' : '9c25d2d740c9bcadbfd19a3cf16a0352','format' : 'iframe','height' : 600,'width' : 250,'params' : {}};</script>
-     <script src="https://www.highperformanceformat.com/9c25d2d740c9bcadbfd19a3cf16a0352/invoke.js"></script>
+     <script src="https://www.highperformanceformat.com/9c25d2d740c9bcadbfd19a3cf16a0352/invoke.js" defer></script>
     </div>
    </div>
    <div class="content-center">
@@ -1511,33 +1483,12 @@
     </header>
     <div class="header-ad-section">
      <div class="ad-wrapper">
-      <script src="https://pl28928708.profitablecpmratenetwork.com/7f/3a/16/7f3a163fafea60acf12c3e22ab916251.js"></script>
+      <script src="https://pl28928708.profitablecpmratenetwork.com/7f/3a/16/7f3a163fafea60acf12c3e22ab916251.js" defer></script>
       <script>atOptions = {'key' : 'fc44ffd0fc14b144149751dc5340a83d','format' : 'iframe','height' : 50,'width' : 320,'params' : {}};</script>
-      <script src="https://www.highperformanceformat.com/fc44ffd0fc14b144149751dc5340a83d/invoke.js"></script>
+      <script src="https://www.highperformanceformat.com/fc44ffd0fc14b144149751dc5340a83d/invoke.js" defer></script>
      </div>
     </div>
     <div class="home-content">
-     <div class="hero-container">
-      <div class="hero-slide active">
-       <div class="hero-overlay"></div>
-       <div class="hero-content">
-        <span class="hero-tag">Trending Now</span>
-        <h2 class="hero-title">Kingdom of the Planet of the Apes</h2>
-        <p class="hero-desc">Many years after the reign of Caesar, a young ape goes on a journey that will lead him to question everything.</p>
-        <button class="hero-btn" onclick="openSmartUrl('https://iflex.is')"><i data-lucide="play-circle"></i> Watch Trailer</button>
-       </div>
-      </div>
-      <div class="hero-slide">
-       <div class="hero-overlay"></div>
-       <div class="hero-content">
-        <span class="hero-tag">New Release</span>
-        <h2 class="hero-title">Deadpool & Wolverine</h2>
-        <p class="hero-desc">A weary Wolverine finds himself recovering from his injuries when he comes across a loudmouth Deadpool.</p>
-        <button class="hero-btn" onclick="openSmartUrl('https://iflex.is')"><i data-lucide="play-circle"></i> Stream Now</button>
-       </div>
-      </div>
-     </div>
-
      <div class="search-container">
       <i data-lucide="search" class="search-icon"></i> <input type="text" class="search-input" id="movieSearch" placeholder="Search for premium sources..." onkeyup="searchSources()">
      </div>
@@ -1647,16 +1598,16 @@
      <div class="grid-container" id="sources-grid"></div>
      <div class="ad-section">
       <div class="ad-wrapper">
-       <script src="https://pl28928708.profitablecpmratenetwork.com/7f/3a/16/7f3a163fafea60acf12c3e22ab916251.js"></script>
+       <script src="https://pl28928708.profitablecpmratenetwork.com/7f/3a/16/7f3a163fafea60acf12c3e22ab916251.js" defer></script>
        <script>atOptions = {'key' : 'fc44ffd0fc14b144149751dc5340a83d','format' : 'iframe','height' : 90,'width' : 728,'params' : {}};</script>
-       <script src="https://www.highperformanceformat.com/fc44ffd0fc14b144149751dc5340a83d/invoke.js"></script>
+       <script src="https://www.highperformanceformat.com/fc44ffd0fc14b144149751dc5340a83d/invoke.js" defer></script>
       </div>
      </div>
      <div class="in-grid-ad">
       <div class="ad-wrapper">
-       <script src="https://pl28928708.profitablecpmratenetwork.com/7f/3a/16/7f3a163fafea60acf12c3e22ab916251.js"></script>
+       <script src="https://pl28928708.profitablecpmratenetwork.com/7f/3a/16/7f3a163fafea60acf12c3e22ab916251.js" defer></script>
        <script>atOptions = {'key' : 'fc44ffd0fc14b144149751dc5340a83d','format' : 'iframe','height' : 50,'width' : 320,'params' : {}};</script>
-       <script src="https://www.highperformanceformat.com/fc44ffd0fc14b144149751dc5340a83d/invoke.js"></script>
+       <script src="https://www.highperformanceformat.com/fc44ffd0fc14b144149751dc5340a83d/invoke.js" defer></script>
       </div>
      </div>
      
@@ -1711,9 +1662,9 @@
 
      <div class="ad-section-horizontal">
       <div class="ad-wrapper">
-       <script src="https://pl28928708.profitablecpmratenetwork.com/7f/3a/16/7f3a163fafea60acf12c3e22ab916251.js"></script>
+       <script src="https://pl28928708.profitablecpmratenetwork.com/7f/3a/16/7f3a163fafea60acf12c3e22ab916251.js" defer></script>
        <script>atOptions = {'key' : 'fc44ffd0fc14b144149751dc5340a83d','format' : 'iframe','height' : 50,'width' : 320,'params' : {}};</script>
-       <script src="https://www.highperformanceformat.com/fc44ffd0fc14b144149751dc5340a83d/invoke.js"></script>
+       <script src="https://www.highperformanceformat.com/fc44ffd0fc14b144149751dc5340a83d/invoke.js" defer></script>
       </div>
      </div>
     </div>
@@ -1752,21 +1703,21 @@
     </div>
     <div style="background:var(--bg-main);width:100%;display:flex;justify-content:center;padding:8px 0;border-bottom:1px solid rgba(124,58,237,0.15);">
      <div class="ad-wrapper">
-      <script src="https://pl28928708.profitablecpmratenetwork.com/7f/3a/16/7f3a163fafea60acf12c3e22ab916251.js"></script>
+      <script src="https://pl28928708.profitablecpmratenetwork.com/7f/3a/16/7f3a163fafea60acf12c3e22ab916251.js" defer></script>
       <script>atOptions = {'key' : 'fc44ffd0fc14b144149751dc5340a83d','format' : 'iframe','height' : 50,'width' : 320,'params' : {}};</script>
-      <script src="https://www.highperformanceformat.com/fc44ffd0fc14b144149751dc5340a83d/invoke.js"></script>
+      <script src="https://www.highperformanceformat.com/fc44ffd0fc14b144149751dc5340a83d/invoke.js" defer></script>
      </div>
-    </div><iframe id="web-frame" src="" allowfullscreen allow="autoplay; fullscreen"></iframe>
+    </div><iframe id="web-frame" src="" allowfullscreen allow="autoplay; fullscreen" loading="lazy"></iframe>
    <div id="video-container">
-    <video id="pro-player" controls>
+    <video id="pro-player" controls preload="none">
      Your browser does not support the video tag.
     </video>
    </div>
    <div style="background:var(--bg-main);width:100%;display:flex;justify-content:center;padding:8px 0;border-top:1px solid rgba(124,58,237,0.15);">
     <div class="ad-wrapper">
-     <script src="https://pl28928708.profitablecpmratenetwork.com/7f/3a/16/7f3a163fafea60acf12c3e22ab916251.js"></script>
+     <script src="https://pl28928708.profitablecpmratenetwork.com/7f/3a/16/7f3a163fafea60acf12c3e22ab916251.js" defer></script>
      <script>atOptions = {'key' : 'fc44ffd0fc14b144149751dc5340a83d','format' : 'iframe','height' : 50,'width' : 320,'params' : {}};</script>
-     <script src="https://www.highperformanceformat.com/fc44ffd0fc14b144149751dc5340a83d/invoke.js"></script>
+     <script src="https://www.highperformanceformat.com/fc44ffd0fc14b144149751dc5340a83d/invoke.js" defer></script>
     </div>
    </div>
   </div>
@@ -2035,27 +1986,6 @@
         }, 3000);
     }
 
-    function initHero() {
-        let currentSlide = 0;
-        const slides = document.querySelectorAll('.hero-slide');
-        if(slides.length > 0) {
-            setInterval(() => {
-                slides[currentSlide].classList.remove('active');
-                currentSlide = (currentSlide + 1) % slides.length;
-                slides[currentSlide].classList.add('active');
-            }, 5000);
-        }
-        
-        // Random Status Update
-        const statusText = document.getElementById('net-status');
-        if(statusText) {
-            const statuses = ['NETWORK: STABLE', 'SECURE: AES-256', 'SERVER: GLOBAL', 'NODE: ACTIVE'];
-            setInterval(() => {
-                statusText.textContent = statuses[Math.floor(Math.random() * statuses.length)];
-            }, 8000);
-        }
-    }
-
     function initializeFAQ() {
         const faqData = [
             { q: 'What are Hollywood movies in Hindi dubbed?', a: 'Hollywood movies in Hindi dubbed are English movies that are translated and voiced in Hindi language so Hindi-speaking audiences can easily watch Hollywood action movies, adventure movies, and blockbuster films.' },
@@ -2241,7 +2171,8 @@
         document.body.removeEventListener('click', triggerPopUnder);
     }
 
-    window.onload = async () => { 
+    // Instant Load Logic
+    async function initApp() {
         soundEffects.init();
         
         // Start SDK in background
@@ -2252,9 +2183,6 @@
         if (window.lucide) {
             window.lucide.createIcons();
         }
-
-        // Initialize Hero & Sidebars
-        initHero();
 
         // --- DEEP LINKING CHECK ON LOAD ---
         const hash = window.location.hash;
@@ -2278,20 +2206,35 @@
             }
         }
         
-        // Faster splash
+        // Faster splash - Open website same time
+        const splash = document.getElementById('splash-screen');
+        const home = document.getElementById('home-screen');
+        const nav = document.querySelector('.bottom-nav-bar');
+        const bot = document.getElementById('pro-bot');
+
+        // Prepare UI in background
+        home.style.display = 'flex';
+        if(nav) nav.style.display = 'flex';
+        if(bot) bot.style.display = 'flex';
+        updateAllUI();
+
+        // Instant fade out
         setTimeout(() => { 
             soundEffects.playSuccess();
-            document.getElementById('splash-screen').style.opacity = '0'; 
+            splash.style.opacity = '0'; 
+            splash.style.pointerEvents = 'none'; // Allow interaction while fading
             setTimeout(() => { 
-                document.getElementById('splash-screen').style.display = 'none'; 
-                document.getElementById('home-screen').style.display = 'flex';
-                // Show Pro UI elements only after splash screen
-                document.querySelector('.bottom-nav-bar').style.display = 'flex';
-                document.getElementById('pro-bot').style.display = 'flex';
-                updateAllUI();
-            }, 300); 
-        }, 1200); 
-    };
+                splash.style.display = 'none'; 
+            }, 400); // Matches transition duration
+        }, 50); // Minimal delay to ensure home screen display: flex is applied
+    }
+
+    // Run as soon as basic structure is ready
+    if (document.readyState === 'loading') {
+        document.addEventListener('DOMContentLoaded', initApp);
+    } else {
+        initApp();
+    }
 
     function openSmartUrl() {
         const urlInput = document.getElementById('smartUrlInput');
@@ -2582,12 +2525,22 @@
         }
     }
   </script>
-  <script type="text/javascript" src="https://pl28898452.effectivegatecpm.com/a0/7e/d2/a07ed2c8c7869a25f82bbe9ee3ce8f6e.js"></script>
-  <script src="https://pl28896078.effectivegatecpm.com/2a/e3/02/2ae302633767e62e475c35118b1a4620.js"></script>
-  <script src="https://pl28928708.profitablecpmratenetwork.com/7f/3a/16/7f3a163fafea60acf12c3e22ab916251.js"></script>
-  <script src="https://pl28928708.profitablecpmratenetwork.com/7f/3a/16/7f3a163fafea60acf12c3e22ab916251.js"></script>
-  <script src="https://pl28928708.profitablecpmratenetwork.com/7f/3a/16/7f3a163fafea60acf12c3e22ab916251.js"></script>
-  <script src="https://pl28928708.profitablecpmratenetwork.com/7f/3a/16/7f3a163fafea60acf12c3e22ab916251.js"></script>
+  <script>
+    // Delay non-critical assets
+    window.addEventListener('load', () => {
+      const delayScripts = [
+        'https://pl28898452.effectivegatecpm.com/a0/7e/d2/a07ed2c8c7869a25f82bbe9ee3ce8f6e.js',
+        'https://pl28896078.effectivegatecpm.com/2a/e3/02/2ae302633767e62e475c35118b1a4620.js',
+        'https://pl28928708.profitablecpmratenetwork.com/7f/3a/16/7f3a163fafea60acf12c3e22ab916251.js'
+      ];
+      delayScripts.forEach(src => {
+        const s = document.createElement('script');
+        s.src = src;
+        s.defer = true;
+        document.body.appendChild(s);
+      });
+    });
+  </script>
   <button id="backToTop" onclick="scrollToTop()">
    <i data-lucide="arrow-up"></i>
   </button>
